@@ -45,7 +45,7 @@ public class CalendarMainLayout extends RelativeLayout {
 		
 		calGridView = (FixedGridView) findViewById(R.id.calGridView);
 		// получение текущей даты
-		Calendar curdate = GregorianCalendar.getInstance();
+		final Calendar curdate = GregorianCalendar.getInstance();
 		firstDayOfWeek = curdate.getFirstDayOfWeek() - 1;
 		// получение номера первого дня месяца
 		// получение первого числа месяца
@@ -70,8 +70,12 @@ public class CalendarMainLayout extends RelativeLayout {
 			
 			@Override
 			public void onClick(View v) {
-				firstDayCurMonth.add(Calendar.MONTH, 1);
-				createCalendar(firstDayCurMonth, curcontext);
+				// нельзя выбрать месяц за текущим
+				if (curdate.get(Calendar.MONTH) != firstDayCurMonth.get(Calendar.MONTH) && 
+						curdate.get(Calendar.YEAR) != firstDayCurMonth.get(Calendar.YEAR)) {
+					firstDayCurMonth.add(Calendar.MONTH, 1);
+					createCalendar(firstDayCurMonth, curcontext);
+				}
 			}
 		});
 		
