@@ -19,6 +19,8 @@ public final class R {
     public static final class id {
         public static int calGridView=0x7f060006;
         public static int centralInfo=0x7f060001;
+        public static int dateGridText=0x7f060007;
+        public static int firstLetterWord=0x7f060008;
         public static int leftButton=0x7f060004;
         public static int mainCalendarLayout=0x7f060000;
         public static int monthText=0x7f060002;
@@ -27,7 +29,9 @@ public final class R {
     }
     public static final class layout {
         public static int calendar_main=0x7f030000;
-        public static int month_list=0x7f030001;
+        public static int date_grid=0x7f030001;
+        public static int group_item=0x7f030002;
+        public static int month_list=0x7f030003;
     }
     public static final class string {
         public static int app_name=0x7f040000;

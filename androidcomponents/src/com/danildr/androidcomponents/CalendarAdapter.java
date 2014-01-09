@@ -1,13 +1,9 @@
 package com.danildr.androidcomponents;
 
 
-import java.util.Calendar;
 import java.util.List;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,15 +38,17 @@ public class CalendarAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		TextView gridView;
+		View gridView;
 		if (convertView == null) {
-			gridView = new TextView(this.context);
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			gridView = inflater.inflate(R.layout.date_grid, null);
 		} else {
-			gridView = (TextView)convertView;
+			gridView = (View)convertView;
 		}
-		gridView.setText(this.days.get(position));
-		gridView.setTextColor(Color.WHITE);
-		gridView.setGravity(Gravity.CENTER);
+		
+		TextView gridDateText = (TextView) gridView.findViewById(R.id.dateGridText);
+		gridDateText.setText(this.days.get(position));
 		return gridView;
 	}
 
