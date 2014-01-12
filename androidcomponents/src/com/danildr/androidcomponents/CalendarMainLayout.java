@@ -182,5 +182,7 @@ public class CalendarMainLayout extends RelativeLayout {
 		
 		return monthList;
 	}
+	
+	//public void setAvailableDates() {}
 
 }
