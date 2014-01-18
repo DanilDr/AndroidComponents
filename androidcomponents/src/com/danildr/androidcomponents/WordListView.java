@@ -39,40 +39,37 @@ public class WordListView extends ExpandableListView {
 	
 	private void createGroupList() {
 		groupList = new ArrayList<String>();
-		groupList.add("HP");
-        groupList.add("Dell");
-        groupList.add("Lenovo");
-        groupList.add("Sony");
-        groupList.add("HCL");
-        groupList.add("Samsung");
+		groupList.add("А");
+        groupList.add("Б");
+        groupList.add("В");
+        groupList.add("Г");
+        groupList.add("Д");
+        groupList.add("Е");
 	}
 	
 	private void createCollection() {
-		String[] hpModels = { "HP Pavilion G6-2014TX", "ProBook HP 4540",
-        "HP Envy 4-1025TX" };
-		String[] hclModels = { "HCL S2101", "HCL L2102", "HCL V2002" };
-		String[] lenovoModels = { "IdeaPad Z Series", "Essential G Series",
-		        "ThinkPad X Series", "Ideapad Z Series" };
-		String[] sonyModels = { "VAIO E Series", "VAIO Z Series",
-		        "VAIO S Series", "VAIO YB Series" };
-		String[] dellModels = { "Inspiron", "Vostro", "XPS" };
-		String[] samsungModels = { "NP Series", "Series 5", "SF Series" };
+		String[] wordList1 = { "Арбуз", "Абажур", "Армян" };
+		String[] wordList2 = { "Балалайка", "Бубреныш", "Буренка" };
+		String[] wordList3 = { "Веник", "Вобла", "Волк", "Воланд" };
+		String[] wordList4 = { "Гвоздь", "Гадалка", "Горком", "Горка" };
+		String[] wordList5 = { "Дуло", "Душка", "Дятел" };
+		String[] wordList6 = { "Ешка", "Ебазавр", "Епел" };
 		
 		wordCollection = new LinkedHashMap<String, List<String>>();
 		
 		for (String laptop : groupList) {
-		    if (laptop.equals("HP")) {
-		        loadChild(hpModels);
-		    } else if (laptop.equals("Dell"))
-		        loadChild(dellModels);
-		    else if (laptop.equals("Sony"))
-		        loadChild(sonyModels);
-		    else if (laptop.equals("HCL"))
-		        loadChild(hclModels);
-		    else if (laptop.equals("Samsung"))
-		        loadChild(samsungModels);
+		    if (laptop.equals("А")) {
+		        loadChild(wordList1);
+		    } else if (laptop.equals("Б"))
+		        loadChild(wordList2);
+		    else if (laptop.equals("В"))
+		        loadChild(wordList3);
+		    else if (laptop.equals("Г"))
+		        loadChild(wordList4);
+		    else if (laptop.equals("Д"))
+		        loadChild(wordList5);
 		    else
-		        loadChild(lenovoModels);
+		        loadChild(wordList6);
 		
 		    wordCollection.put(laptop, childList);
 		}
