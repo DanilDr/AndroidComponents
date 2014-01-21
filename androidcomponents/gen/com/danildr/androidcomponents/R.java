@@ -11,21 +11,26 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static int background=0x7f020000;
-        public static int ic_launcher=0x7f020001;
-        public static int leftbut=0x7f020002;
-        public static int rightbut=0x7f020003;
+        public static int addfavor=0x7f020000;
+        public static int background=0x7f020001;
+        public static int deletefavor=0x7f020002;
+        public static int ic_launcher=0x7f020003;
+        public static int leftbut=0x7f020004;
+        public static int rightbut=0x7f020005;
     }
     public static final class id {
+        public static int LinearLayout1=0x7f060007;
+        public static int addDelFavour=0x7f06000a;
         public static int calGridView=0x7f060006;
         public static int centralInfo=0x7f060001;
-        public static int dateGridText=0x7f060008;
-        public static int firstLetterWord=0x7f060009;
+        public static int dateGridText=0x7f06000b;
+        public static int firstLetterWord=0x7f06000c;
         public static int leftButton=0x7f060004;
         public static int mainCalendarLayout=0x7f060000;
         public static int monthText=0x7f060002;
         public static int rightButton=0x7f060005;
-        public static int wordelemlist=0x7f060007;
+        public static int wordelemlist=0x7f060008;
+        public static int wrapAddDelFavour=0x7f060009;
         public static int yearText=0x7f060003;
     }
     public static final class layout {
