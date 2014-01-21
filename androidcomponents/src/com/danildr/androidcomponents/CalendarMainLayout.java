@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,12 +31,16 @@ public class CalendarMainLayout extends RelativeLayout {
 	private int firstDayOfWeek; // первый день недели 1 (воскресень) или 2 (понедельник)
 	private TextView monthText; // поле текущего месяца
 	private TextView yearText; // поле текущего года
+	private Context curcontext; // родительский Context
+	private String[] choiseList = { "2013", "2014" }; // лист выбора года по умолчанию
+	private List<String> dates; // даты доступные для просмотра слов
 	
 	public CalendarMainLayout(Context context, AttributeSet attr) {
 		super(context, attr);
-		final Context curcontext = context; // родительский Context
+		this.curcontext = context;
 		LayoutInflater layoutInflater = LayoutInflater.from(curcontext);
 		layoutInflater.inflate(R.layout.calendar_main, this);
+		
 		// получение полей текущего месяца и года 
 		monthText = (TextView) findViewById(R.id.monthText);
 		yearText = (TextView) findViewById(R.id.yearText);
@@ -111,7 +119,6 @@ public class CalendarMainLayout extends RelativeLayout {
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(curcontext);
 				builder.setTitle(curcontext.getString(R.string.selectyear));
-				final String[] choiseList = { "2013", "2014" };
 				int selected = -1; // does not select anything
 				builder.setSingleChoiceItems(choiseList, selected, new DialogInterface.OnClickListener() {
 					
@@ -183,6 +190,35 @@ public class CalendarMainLayout extends RelativeLayout {
 		return monthList;
 	}
 	
-	//public void setAvailableDates() {}
+	/* отображение доступных дат на календаре
+	 * принимает ISO формат даты
+	 * 1. setAvailableDates - принимает массив дат
+	 * 2. setAvailableDates - принимает JSONArray и выбирает дату в JSONObject по слову date
+	 */
+	public void setAvailableDates(List<String> dates) {
+		this.dates = dates;
+		createCalendar(firstDayCurMonth, curcontext);
+	}
+	
+	public void setAvailableDates(JSONArray jsonDates) {
+		List<String> datesArray = new ArrayList<String>();
+		if (jsonDates != null) {
+			for (int i = 0; i < jsonDates.length(); i++) {
+				try {
+					JSONObject jsonelem = jsonDates.getJSONObject(i);
+					datesArray.add(jsonelem.getString("date"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		this.dates = datesArray;
+		createCalendar(firstDayCurMonth, curcontext);
+	}
+	
+	public void setListYears(String[] choiseList) {
+		this.choiseList = choiseList;
+	}
 
 }
