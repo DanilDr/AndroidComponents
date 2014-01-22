@@ -10,11 +10,11 @@ import org.json.JSONObject;
 public class GetJSONfromUrl {
 	private String urlstr;
 	
-	GetJSONfromUrl(String urlstr) {
+	public GetJSONfromUrl(String urlstr) {
 		this.urlstr = urlstr;
 	}
 	
-	protected JSONObject getJson() {
+	public JSONObject getJson() {
 		URL url;
 		String inputLine;
 		String inputInfo = "";
