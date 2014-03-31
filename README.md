@@ -23,3 +23,4 @@ CalendarAdapter - календарь. Обображает данные исхо
 FixedGridView - усовершенствованнй грид, исправлена ошибка отображения при скрытии.
 GetJSONfromUrl - возвращает JSONObject. Входной параметр URL.
 LoadingJSONfromURL - асинхронное получение JSONObject.
+ 
