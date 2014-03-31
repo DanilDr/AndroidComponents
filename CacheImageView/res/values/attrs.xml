@@ -1,0 +1,5 @@
+<resources>
+   <declare-styleable name="CacheImageView">
+       <attr name="imageurl" format="string" />
+   </declare-styleable>
+</resources>
