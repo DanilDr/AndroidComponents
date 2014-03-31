@@ -19,7 +19,7 @@ androidcomponents
 
 Различные компоненты для Android.
 
-CalendarAdapter - календарь. Обображает данные исходя из настройки вашей локализации.
+CalendarAdapter - календарь. Отображает данные исходя из настройки вашей локализации.
 FixedGridView - усовершенствованнй грид, исправлена ошибка отображения при скрытии.
 GetJSONfromUrl - возвращает JSONObject. Входной параметр URL.
 LoadingJSONfromURL - асинхронное получение JSONObject.
