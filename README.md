@@ -7,9 +7,9 @@ CacheImageView
 
 Виджет для Android отображающий изобржения.
 Для полклюючения требуется
-AndroidManifest
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+AndroidManifest<br />
+  \<uses-permission android:name="android.permission.INTERNET" /><br />
+  \<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><br />
     
 Папка на внешнем носителе назвается по последнему слову в названии вызывающего пакета.
 Например:
@@ -19,8 +19,8 @@ androidcomponents
 
 Различные компоненты для Android.
 
-CalendarAdapter - календарь. Отображает данные исходя из настройки вашей локализации.
-FixedGridView - усовершенствованнй грид, исправлена ошибка отображения при скрытии.
-GetJSONfromUrl - возвращает JSONObject. Входной параметр URL.
-LoadingJSONfromURL - асинхронное получение JSONObject.
+CalendarAdapter - календарь. Отображает данные исходя из настройки вашей локализации.<br />
+FixedGridView - усовершенствованнй грид, исправлена ошибка отображения при скрытии.<br />
+GetJSONfromUrl - возвращает JSONObject. Входной параметр URL.<br />
+LoadingJSONfromURL - асинхронное получение JSONObject.<br />
  
