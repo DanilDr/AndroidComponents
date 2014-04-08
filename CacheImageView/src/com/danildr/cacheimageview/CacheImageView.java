@@ -32,7 +32,7 @@ public class CacheImageView extends ImageView {
 	private String CACHE_DIR;
 	private String EXTERNAL_DIR;
 	private Object mDiskCacheLock = new Object();
-	private String imageKey;
+	public String imageKey;
 	
 	public CacheImageView(Context context) {
 		super(context);
@@ -197,4 +197,5 @@ public class CacheImageView extends ImageView {
 		File cacheImage = new File(cachedir, imageKey);
 		return cacheImage.getPath();
 	}
+	
 }
