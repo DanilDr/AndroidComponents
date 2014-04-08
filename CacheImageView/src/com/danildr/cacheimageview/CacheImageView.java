@@ -161,7 +161,7 @@ public class CacheImageView extends ImageView {
 	
 	private void setImage() throws InterruptedException, ExecutionException, TimeoutException {
 		if (imageURL != null) {
-			String imageKey = getImageKey();
+			imageKey = getImageKey();
 			new AsyncSetImage(this).execute(imageKey, imageURL, CACHE_DIR);
 		}
 	}
@@ -190,5 +190,11 @@ public class CacheImageView extends ImageView {
 	        return true;
 	    }
 	    return false;
+	}
+	
+	public String getAbsolutePath() {
+		File cachedir = new File(CACHE_DIR);
+		File cacheImage = new File(cachedir, imageKey);
+		return cacheImage.getPath();
 	}
 }
