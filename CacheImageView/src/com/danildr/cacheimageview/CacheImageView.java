@@ -37,6 +37,7 @@ public class CacheImageView extends ImageView {
 	public CacheImageView(Context context) {
 		super(context);
 		this.context = context;
+		this.setImageResource(R.drawable.hourglass);
 		initImage();
 	}
 	
@@ -44,22 +45,22 @@ public class CacheImageView extends ImageView {
 		super(context, attrs);
 		this.context = context;
 		initImage();
-		TypedArray a = context.getTheme().obtainStyledAttributes(
-		        attrs,
-		        R.styleable.CacheImageView,
-		        0, 0);
-	
+		TypedArray a;
+		// инициализация картинки
 		try {
+			a = context.getTheme().obtainStyledAttributes(
+			        attrs,
+			        R.styleable.CacheImageView,
+			        0, 0);
 			imageURL = a.getString(R.styleable.CacheImageView_imageurl);
 			setImage();
+			a.recycle();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		} catch (TimeoutException e) {
 			e.printStackTrace();
-		} finally {
-		    a.recycle();
 		}
 		
 		// проверка папки для кэширования
@@ -159,8 +160,10 @@ public class CacheImageView extends ImageView {
 	}
 	
 	private void setImage() throws InterruptedException, ExecutionException, TimeoutException {
-		String imageKey = getImageKey();
-		new AsyncSetImage(this).execute(imageKey, imageURL, CACHE_DIR);
+		if (imageURL != null) {
+			String imageKey = getImageKey();
+			new AsyncSetImage(this).execute(imageKey, imageURL, CACHE_DIR);
+		}
 	}
 	
 	public void setImageUrl(String imageURL) {
