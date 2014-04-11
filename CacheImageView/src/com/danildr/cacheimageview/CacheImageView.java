@@ -48,11 +48,8 @@ public class CacheImageView extends ImageView {
 		TypedArray a;
 		// инициализация картинки
 		try {
-			a = context.getTheme().obtainStyledAttributes(
-			        attrs,
-			        R.styleable.CacheImageView,
-			        0, 0);
-			imageURL = a.getString(R.styleable.CacheImageView_imageurl);
+			a = context.obtainStyledAttributes(attrs, new int[] {R.attr.imageurl});
+			imageURL = a.getString(0);
 			setImage();
 			a.recycle();
 		} catch (InterruptedException e) {
