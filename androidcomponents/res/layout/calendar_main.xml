@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/centralInfo"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="@dimen/calendar_central_info_height"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" 
             android:layout_marginLeft="15dp"
@@ -51,21 +51,19 @@
 
         <RelativeLayout
             android:id="@+id/leftButton"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="@dimen/calendar_arrow_width"
+            android:layout_height="@dimen/calendar_arrow_height"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:minHeight="10dp"
             android:background="@drawable/leftbut" >
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rightButton"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="@dimen/calendar_arrow_width"
+            android:layout_height="@dimen/calendar_arrow_height"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-			android:minHeight="20dp"
 			android:background="@drawable/rightbut" >
         </RelativeLayout>
 
