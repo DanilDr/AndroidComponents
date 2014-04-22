@@ -8,9 +8,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CalendarAdapter extends BaseAdapter {
 	private Context context;
@@ -22,7 +24,7 @@ public class CalendarAdapter extends BaseAdapter {
 		this.context = context;
 		this.days = days;
 		this.curyear = curyear;
-		this.curmonth = curmonth;
+		this.curmonth = curmonth;		
 	}
 
 	@Override
@@ -32,8 +34,7 @@ public class CalendarAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		return days.get(arg0);
 	}
 
 	@Override
@@ -48,13 +49,13 @@ public class CalendarAdapter extends BaseAdapter {
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			gridView = inflater.inflate(R.layout.date_grid, null);
+			gridView = (View) inflater.inflate(R.layout.date_grid, null);
 		} else {
-			gridView = (View)convertView;
+			gridView = (View) convertView;
 		}
 		
 		TextView gridDateText = (TextView) gridView.findViewById(R.id.dateGridText);
-		DateCellInfo curDateCell = days.get(position);
+		final DateCellInfo curDateCell = days.get(position);
 		if (curDateCell.date != null) {
 			Integer curDate = curDateCell.date.get(Calendar.DATE);
 			gridDateText.setText(curDate.toString());
@@ -66,5 +67,4 @@ public class CalendarAdapter extends BaseAdapter {
 		}
 		return gridView;
 	}
-
 }

@@ -23,9 +23,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CalendarMainLayout extends RelativeLayout {
 	private FixedGridView calGridView; // грид с датами
@@ -41,6 +44,7 @@ public class CalendarMainLayout extends RelativeLayout {
 	private List<Calendar> dates = null; // даты доступные для просмотра слов
 	private Calendar minDate = null; // минимально отображаемая дата
 	private Calendar maxDate = null; // максимально отображаемая дата
+	private OnItemClickListener onItemClickListener = null;
 	
 	public CalendarMainLayout(Context context, AttributeSet attr) {
 		super(context, attr);
@@ -138,6 +142,13 @@ public class CalendarMainLayout extends RelativeLayout {
 			}
 		});
 		
+		// задание диапозона доступных годов
+		List<String> yearsList = new ArrayList<String>();
+		for (int i = 1990; i < 2099; i++ ) {
+			yearsList.add(new Integer(i).toString());
+		}
+		choiseList = new String[yearsList.size()];
+		yearsList.toArray(choiseList);
 	}
 	
 	// создание календаря
@@ -176,9 +187,10 @@ public class CalendarMainLayout extends RelativeLayout {
 			listDays.add(new DateCellInfo(curGridDate, availableDate));
 		}
 		
+		// адаптер
+		final CalendarAdapter calendarAdapter = new CalendarAdapter(curcontext, listDays, curyear, curmonth);
 		// построение грида
-		calGridView.setAdapter(new CalendarAdapter(curcontext, listDays, curyear, curmonth));		
-				
+		calGridView.setAdapter(calendarAdapter);
 	}
 		
 	// создание списка с месяцами
@@ -233,8 +245,14 @@ public class CalendarMainLayout extends RelativeLayout {
 		this.minDate = minDate;
 	}
 	
+	// задание списка доступных годов
 	public void setListYears(String[] choiseList) {
 		this.choiseList = choiseList;
 	}
-
+	
+	// задание реакции на нажатие на дату календаря
+	public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+		this.onItemClickListener = onItemClickListener;
+		calGridView.setOnItemClickListener(this.onItemClickListener);
+	}
 }
