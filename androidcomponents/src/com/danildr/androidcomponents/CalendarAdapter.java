@@ -1,9 +1,11 @@
 package com.danildr.androidcomponents;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,15 @@ import android.widget.TextView;
 
 public class CalendarAdapter extends BaseAdapter {
 	private Context context;
-	private List<String> days;
+	private List<DateCellInfo> days;
+	private Integer curyear;
+	private Integer curmonth;
 	
-	public CalendarAdapter(Context context, List<String> days){
+	public CalendarAdapter(Context context, List<DateCellInfo> days, Integer curyear, Integer curmonth){
 		this.context = context;
 		this.days = days;
+		this.curyear = curyear;
+		this.curmonth = curmonth;
 	}
 
 	@Override
@@ -48,7 +54,16 @@ public class CalendarAdapter extends BaseAdapter {
 		}
 		
 		TextView gridDateText = (TextView) gridView.findViewById(R.id.dateGridText);
-		gridDateText.setText(this.days.get(position));
+		DateCellInfo curDateCell = days.get(position);
+		if (curDateCell.date != null) {
+			Integer curDate = curDateCell.date.get(Calendar.DATE);
+			gridDateText.setText(curDate.toString());
+			if (curDateCell.available == false) {
+				gridDateText.setBackgroundColor(Color.GRAY);
+			}
+		} else {
+			gridDateText.setText(curDateCell.gridStr);
+		}
 		return gridView;
 	}
 

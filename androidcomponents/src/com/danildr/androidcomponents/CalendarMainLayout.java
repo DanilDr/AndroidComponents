@@ -1,7 +1,11 @@
 package com.danildr.androidcomponents;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.integer;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,7 +29,7 @@ import android.widget.TextView;
 
 public class CalendarMainLayout extends RelativeLayout {
 	private FixedGridView calGridView; // грид с датами
-	private List<String> listDays; // лист для заполнения грида
+	private List<DateCellInfo> listDays; // лист для заполнения грида
 	private Map<Integer, Integer> monthList; // лист с месяцами
 	private Integer[] weekdayList; // список дней недели
 	private Calendar firstDayCurMonth = new GregorianCalendar(); // дата первого числа выбранного месяца
@@ -33,7 +38,9 @@ public class CalendarMainLayout extends RelativeLayout {
 	private TextView yearText; // поле текущего года
 	private Context curcontext; // родительский Context
 	private String[] choiseList = { "2013", "2014" }; // лист выбора года по умолчанию
-	private List<String> dates; // даты доступные для просмотра слов
+	private List<Calendar> dates = null; // даты доступные для просмотра слов
+	private Calendar minDate = null; // минимально отображаемая дата
+	private Calendar maxDate = null; // максимально отображаемая дата
 	
 	public CalendarMainLayout(Context context, AttributeSet attr) {
 		super(context, attr);
@@ -78,12 +85,8 @@ public class CalendarMainLayout extends RelativeLayout {
 			
 			@Override
 			public void onClick(View v) {
-				// нельзя выбрать месяц за текущим
-				if (curdate.get(Calendar.MONTH) != firstDayCurMonth.get(Calendar.MONTH) && 
-						curdate.get(Calendar.YEAR) != firstDayCurMonth.get(Calendar.YEAR)) {
-					firstDayCurMonth.add(Calendar.MONTH, 1);
-					createCalendar(firstDayCurMonth, curcontext);
-				}
+				firstDayCurMonth.add(Calendar.MONTH, 1);
+				createCalendar(firstDayCurMonth, curcontext);
 			}
 		});
 		
@@ -137,14 +140,22 @@ public class CalendarMainLayout extends RelativeLayout {
 		
 	}
 	
+	// создание календаря
 	private void createCalendar(Calendar showDate, Context curcontext) {
+		// заполенение данных о годе и месяцах
+		Integer curyear = firstDayCurMonth.get(Calendar.YEAR);
+		yearText.setText(new Integer(curyear).toString());
+		Integer curmonth = firstDayCurMonth.get(Calendar.MONTH);
+		monthText.setText(curcontext.getString(monthList.get(curmonth)) + ", ");
+				
 		// получение количества дней в месяце
 		int daysInMonth = showDate.getActualMaximum(Calendar.DAY_OF_MONTH);
 				
-		listDays = new ArrayList<String>(); // инициализация массива с календарем
+		listDays = new ArrayList<DateCellInfo>(); // инициализация массива с календарем
+		
 		// заполнение дней недели
 		for (int i = 0; i < weekdayList.length; i++) {
-			listDays.add(curcontext.getString(weekdayList[i]));
+			listDays.add(new DateCellInfo(curcontext.getString(weekdayList[i])));
 		}
 		
 		// заполнение пустых клеток для месяца
@@ -152,24 +163,25 @@ public class CalendarMainLayout extends RelativeLayout {
 		int firstDayNum = showDate.get(Calendar.DAY_OF_WEEK) - 1 - firstDayOfWeek;
 		if (firstDayNum < 0) { firstDayNum = 7 + firstDayNum; }
 		for (int i = 0; i < firstDayNum; i++) {
-			listDays.add("");
+			listDays.add(new DateCellInfo(""));
 		}
 		
 		// заполнение грида календаря
 		for (int i = 1; i <= daysInMonth; i++) {
-			listDays.add(new Integer(i).toString());
+			Calendar curGridDate = new GregorianCalendar(curyear, curmonth, i);
+			Boolean availableDate = false;
+			if (dates != null && dates.contains(curGridDate)) {
+				availableDate = true;
+			}
+			listDays.add(new DateCellInfo(curGridDate, availableDate));
 		}
 		
 		// построение грида
-		calGridView.setAdapter(new CalendarAdapter(curcontext, listDays));
-		
-		// заполенение данных о годе и месяцах
-		int curyear = firstDayCurMonth.get(Calendar.YEAR);
-		yearText.setText(new Integer(curyear).toString());
-		int curmonth = firstDayCurMonth.get(Calendar.MONTH);
-		monthText.setText(curcontext.getString(monthList.get(curmonth)) + ", ");
+		calGridView.setAdapter(new CalendarAdapter(curcontext, listDays, curyear, curmonth));		
+				
 	}
-	
+		
+	// создание списка с месяцами
 	private Map<Integer, Integer> createMonthsList() {
 		
 		monthList = new TreeMap<Integer, Integer>();
@@ -193,28 +205,32 @@ public class CalendarMainLayout extends RelativeLayout {
 	/* отображение доступных дат на календаре
 	 * принимает ISO формат даты
 	 * 1. setAvailableDates - принимает массив дат
-	 * 2. setAvailableDates - принимает JSONArray и выбирает дату в JSONObject по слову date
+	 * 
 	 */
-	public void setAvailableDates(List<String> dates) {
-		this.dates = dates;
+	public void setAvailableDates(List<Date> dates) {
+		List<Calendar> calList = new ArrayList<Calendar>();
+		for (int i = 0; i < dates.size(); i++) {
+			Calendar curCalendar = new GregorianCalendar();
+			curCalendar.setTime(dates.get(i));
+			calList.add(curCalendar);
+		}
+		this.dates = calList;
+		Collections.sort(this.dates);
+		if (this.dates != null) {
+			setMinDate(this.dates.get(0));
+			setMaxDate(this.dates.get(dates.size() - 1));
+		}
 		createCalendar(firstDayCurMonth, curcontext);
 	}
 	
-	public void setAvailableDates(JSONArray jsonDates) {
-		List<String> datesArray = new ArrayList<String>();
-		if (jsonDates != null) {
-			for (int i = 0; i < jsonDates.length(); i++) {
-				try {
-					JSONObject jsonelem = jsonDates.getJSONObject(i);
-					datesArray.add(jsonelem.getString("date"));
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		this.dates = datesArray;
-		createCalendar(firstDayCurMonth, curcontext);
+	// установка максимальной даты
+	public void setMaxDate(Calendar maxDate) {
+		this.maxDate = maxDate;
+	}
+	
+	// установка минимальной даты
+	public void setMinDate(Calendar minDate) {
+		this.minDate = minDate;
 	}
 	
 	public void setListYears(String[] choiseList) {
