@@ -21,7 +21,7 @@ public final class R {
         public static int deletefavor=0x7f020002;
         public static int ic_launcher=0x7f020003;
         public static int leftbut=0x7f020004;
-        public static int rightbut=0x7f020005;
+        public static int rigthbut=0x7f020005;
     }
     public static final class id {
         public static int calGridView=0x7f070006;

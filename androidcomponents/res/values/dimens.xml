@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="calendar_arrow_height">15dp</dimen>
-    <dimen name="calendar_arrow_width">15dp</dimen>
+    <dimen name="calendar_arrow_height">20dp</dimen>
+    <dimen name="calendar_arrow_width">20dp</dimen>
     <dimen name="calendar_central_info_height">25dp</dimen>
     
 </resources>

@@ -228,7 +228,7 @@ public class CalendarMainLayout extends RelativeLayout {
 		}
 		this.dates = calList;
 		Collections.sort(this.dates);
-		if (this.dates != null) {
+		if (this.dates != null && this.dates.size() != 0) {
 			setMinDate(this.dates.get(0));
 			setMaxDate(this.dates.get(dates.size() - 1));
 		}

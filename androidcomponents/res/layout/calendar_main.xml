@@ -63,7 +63,7 @@
             android:layout_height="@dimen/calendar_arrow_height"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-			android:background="@drawable/rightbut" >
+			android:background="@drawable/rigthbut" >
         </RelativeLayout>
 
     </RelativeLayout>

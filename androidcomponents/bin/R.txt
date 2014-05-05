@@ -6,7 +6,7 @@ int drawable background 0x7f020001
 int drawable deletefavor 0x7f020002
 int drawable ic_launcher 0x7f020003
 int drawable leftbut 0x7f020004
-int drawable rightbut 0x7f020005
+int drawable rigthbut 0x7f020005
 int id calGridView 0x7f070006
 int id centralInfo 0x7f070001
 int id dateGridText 0x7f070007
