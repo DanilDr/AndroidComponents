@@ -2,6 +2,8 @@
 <resources>
     <dimen name="calendar_arrow_height">20dp</dimen>
     <dimen name="calendar_arrow_width">20dp</dimen>
-    <dimen name="calendar_central_info_height">25dp</dimen>
-    
+    <dimen name="calendar_central_info_height">30dp</dimen>
+    <dimen name="calendar_date_height">30dp</dimen>
+    <dimen name="calendar_date_text_size">20sp</dimen>
+    <dimen name="calendar_grid_height">210dp</dimen>
 </resources>

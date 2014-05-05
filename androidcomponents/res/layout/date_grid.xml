@@ -8,9 +8,10 @@
     <TextView
         android:id="@+id/dateGridText"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="@dimen/calendar_central_info_height"
         android:textColor="#000"
-        android:text="TextView"
-        android:layout_gravity="center" />
+        android:text="1"
+        android:layout_gravity="center"
+        android:textSize="@dimen/calendar_date_text_size" />
 
 </LinearLayout>

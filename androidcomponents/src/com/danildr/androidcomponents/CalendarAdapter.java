@@ -60,7 +60,7 @@ public class CalendarAdapter extends BaseAdapter {
 			Integer curDate = curDateCell.date.get(Calendar.DATE);
 			gridDateText.setText(curDate.toString());
 			if (curDateCell.available == false) {
-				gridDateText.setBackgroundColor(Color.GRAY);
+				gridView.setBackgroundColor(Color.GRAY);
 			}
 		} else {
 			gridDateText.setText(curDateCell.gridStr);

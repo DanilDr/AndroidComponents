@@ -14,6 +14,9 @@ public final class R {
         public static int calendar_arrow_height=0x7f040000;
         public static int calendar_arrow_width=0x7f040001;
         public static int calendar_central_info_height=0x7f040002;
+        public static int calendar_date_height=0x7f040003;
+        public static int calendar_date_text_size=0x7f040004;
+        public static int calendar_grid_height=0x7f040005;
     }
     public static final class drawable {
         public static int addfavor=0x7f020000;
