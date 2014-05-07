@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="calendar_arrow_height">40dp</dimen>
+    <dimen name="calendar_arrow_width">40dp</dimen>
+    <dimen name="calendar_central_info_height">50dp</dimen>
+    <dimen name="calendar_date_height">40dp</dimen>
+    <dimen name="calendar_date_text_size">28sp</dimen>
+    <dimen name="calendar_grid_height">280dp</dimen>
+</resources>
