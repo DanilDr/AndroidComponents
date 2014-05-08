@@ -80,7 +80,7 @@ public class CacheImageView extends ImageView {
 		FileOutputStream imageFile;
 		try {
 			imageFile = new FileOutputStream(CACHE_DIR + File.separator + key);
-			bitmap.compress(CompressFormat.JPEG, 80, imageFile);
+			bitmap.compress(CompressFormat.PNG, 80, imageFile);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
