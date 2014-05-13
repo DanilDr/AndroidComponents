@@ -15,6 +15,11 @@ AndroidManifest<br />
 Например:
 Вызывающий пакет называется com.example.sampleapp, папка на внешнем носителе будет назваться sampleapp.
 
+CustomToogleButton
+
+Компонент для отображения переключающейся кнопки, ибо встроенная задолбала:)
+
+
 androidcomponents
 
 Различные компоненты для Android.
