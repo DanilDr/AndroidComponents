@@ -1,7 +1,5 @@
 package com.danildr.androidcomponents;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -11,24 +9,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.R.integer;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CalendarMainLayout extends RelativeLayout {
 	private FixedGridView calGridView; // грид с датами
@@ -45,6 +35,7 @@ public class CalendarMainLayout extends RelativeLayout {
 	private Calendar minDate = null; // минимально отображаемая дата
 	private Calendar maxDate = null; // максимально отображаемая дата
 	private OnItemClickListener onItemClickListener = null;
+	private Typeface mainTypeface = null; // шрифт календаря
 	
 	public CalendarMainLayout(Context context, AttributeSet attr) {
 		super(context, attr);
@@ -155,10 +146,16 @@ public class CalendarMainLayout extends RelativeLayout {
 	private void createCalendar(Calendar showDate, Context curcontext) {
 		// заполенение данных о годе и месяцах
 		Integer curyear = firstDayCurMonth.get(Calendar.YEAR);
-		yearText.setText(new Integer(curyear).toString());
+		yearText.setText(Integer.valueOf(curyear).toString());
+		
 		Integer curmonth = firstDayCurMonth.get(Calendar.MONTH);
 		monthText.setText(curcontext.getString(monthList.get(curmonth)) + ", ");
 				
+		if (mainTypeface != null) {
+			yearText.setTypeface(mainTypeface);
+			monthText.setTypeface(mainTypeface);
+		}
+		
 		// получение количества дней в месяце
 		int daysInMonth = showDate.getActualMaximum(Calendar.DAY_OF_MONTH);
 				
@@ -188,7 +185,7 @@ public class CalendarMainLayout extends RelativeLayout {
 		}
 		
 		// адаптер
-		final CalendarAdapter calendarAdapter = new CalendarAdapter(curcontext, listDays, curyear, curmonth);
+		final CalendarAdapter calendarAdapter = new CalendarAdapter(curcontext, listDays, curyear, curmonth, mainTypeface);
 		// построение грида
 		calGridView.setAdapter(calendarAdapter);
 	}
@@ -254,5 +251,10 @@ public class CalendarMainLayout extends RelativeLayout {
 	public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
 		this.onItemClickListener = onItemClickListener;
 		calGridView.setOnItemClickListener(this.onItemClickListener);
+	}
+	
+	// задание основного шрифта календаря
+	public void setTypeface(Typeface inputTypeface) {
+		this.mainTypeface = inputTypeface;
 	}
 }

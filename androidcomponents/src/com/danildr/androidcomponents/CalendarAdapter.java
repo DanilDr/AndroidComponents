@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,12 +20,14 @@ public class CalendarAdapter extends BaseAdapter {
 	private List<DateCellInfo> days;
 	private Integer curyear;
 	private Integer curmonth;
+	private Typeface mainTypeface;
 	
-	public CalendarAdapter(Context context, List<DateCellInfo> days, Integer curyear, Integer curmonth){
+	public CalendarAdapter(Context context, List<DateCellInfo> days, Integer curyear, Integer curmonth, Typeface mainTypeface){
 		this.context = context;
 		this.days = days;
 		this.curyear = curyear;
-		this.curmonth = curmonth;		
+		this.curmonth = curmonth;
+		this.mainTypeface = mainTypeface;
 	}
 
 	@Override
@@ -54,6 +57,9 @@ public class CalendarAdapter extends BaseAdapter {
 		}
 		
 		TextView gridDateText = (TextView) gridView.findViewById(R.id.dateGridText);
+		if (mainTypeface != null) {
+			gridDateText.setTypeface(mainTypeface);
+		}
 		final DateCellInfo curDateCell = days.get(position);
 		if (curDateCell.date != null) {
 			Integer curDate = curDateCell.date.get(Calendar.DATE);
