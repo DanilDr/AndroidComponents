@@ -33,6 +33,7 @@ public class CacheImageView extends ImageView {
 	private String EXTERNAL_DIR;
 	private Object mDiskCacheLock = new Object();
 	public String imageKey;
+	private CompressFormat compressBitmap = CompressFormat.PNG;
 	
 	public CacheImageView(Context context) {
 		super(context);
@@ -80,7 +81,7 @@ public class CacheImageView extends ImageView {
 		FileOutputStream imageFile;
 		try {
 			imageFile = new FileOutputStream(CACHE_DIR + File.separator + key);
-			bitmap.compress(CompressFormat.PNG, 80, imageFile);
+			bitmap.compress(compressBitmap, 80, imageFile);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -193,6 +194,20 @@ public class CacheImageView extends ImageView {
 		File cachedir = new File(CACHE_DIR);
 		File cacheImage = new File(cachedir, imageKey);
 		return cacheImage.getPath();
+	}
+	
+	public void setCompressFormat(String compressFormat) {
+		switch (compressFormat) {
+			case "jpeg":
+				compressBitmap = CompressFormat.JPEG;
+				break;
+			case "png":
+				compressBitmap = CompressFormat.PNG;
+				break;
+			default:
+				compressBitmap = CompressFormat.PNG;
+				break;
+		}
 	}
 	
 }
