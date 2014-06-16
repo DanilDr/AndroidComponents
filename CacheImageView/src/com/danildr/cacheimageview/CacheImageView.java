@@ -77,6 +77,10 @@ public class CacheImageView extends ImageView {
 		}
 	}
 	
+	public String getCacheDir() {
+		return CACHE_DIR;
+	}
+	
 	private void addBitmapToCache(String key, Bitmap bitmap) {
 		FileOutputStream imageFile;
 		try {
